@@ -38,11 +38,14 @@
 
       <!-- Target detectado -->
       <a-entity mindar-image-target="targetIndex: 0">
-                <!-- Wrapper rotado -->
-        <a-entity id="videoWrapper" rotation="0 0 90">
         <!-- Plano donde se reproduce el video -->
-            <a-video id="videoPlane" src="#videoAR" position="0 0 0.01"></a-video>
-      </a-entity>
+        <a-video
+          src="#videoAR"
+          position="0 0 0"
+          rotation="0 0 -90"
+          width="0.5"
+          height="1.1" <!-- Ajustá según el aspecto de tu video -->
+        ></a-video>
       </a-entity>
     </a-scene>
 
