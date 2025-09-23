@@ -43,17 +43,22 @@
           src="#videoAR"
           position="0 0 0"
           rotation="0 0 0"
-          width="1.25"
-          height="2.75" <!-- Ajustá según el aspecto de tu video -->
+          width="1.15"
+          height="2.53" <!-- Ajustá según el aspecto de tu video -->
         ></a-video>
       </a-entity>
     </a-scene>
 
     <script>
-      // Autoplay en móviles (necesita un tap del usuario en iOS/Android)
-      const video = document.querySelector("#videoAR");
-      document.body.addEventListener("click", () => {
+            const video = document.querySelector("#videoAR");
+      const target = document.querySelector("[mindar-image-target]");
+
+      target.addEventListener("targetFound", () => {
         video.play();
+      });
+
+      target.addEventListener("targetLost", () => {
+        video.pause();
       });
     </script>
   </body>
