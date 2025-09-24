@@ -9,8 +9,31 @@
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
     <title>AR Video</title>
+
+    <style>
+      /* 🔹 Nuevo: estilos para el overlay */
+      #overlay {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: url('overlay.jpeg') no-repeat center center;
+        background-size: cover;
+        z-index: 9999; /* siempre por encima */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2em;
+        text-shadow: 0 0 5px black;
+      }
+    </style>
   </head>
   <body>
+    <!-- 🔹 Nuevo: overlay inicial -->
+    <div id="overlay">
+      <p>Toca para iniciar la experiencia Ritex</p>
+    </div>
+
     <!-- Escena AR -->
     <a-scene
       mindar-image="imageTargetSrc: targets.mind;"
@@ -18,6 +41,7 @@
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
+      loading-screen="enabled: false"  <!-- 🔹 Nuevo: desactiva loader azul -->
     >
       <!-- Assets -->
       <a-assets>
@@ -50,13 +74,22 @@
     </a-scene>
 
     <script>
-            const video = document.querySelector("#videoAR");
-      const target = document.querySelector("[mindar-image-target]");
+      const video = document.querySelector("#videoAR");
+      const overlay = document.querySelector("#overlay");
 
+      // 🔹 Nuevo: el primer tap desbloquea el video y oculta el overlay
+      overlay.addEventListener("click", () => {
+        video.play().then(() => {
+          video.pause(); // lo pausamos, solo sirve para desbloquear en iOS
+          overlay.style.display = "none"; // ocultamos overlay
+        });
+      });
+
+      // 🔹 Igual que antes: cuando se detecta el target, play/pause
+      const target = document.querySelector("[mindar-image-target]");
       target.addEventListener("targetFound", () => {
         video.play();
       });
-
       target.addEventListener("targetLost", () => {
         video.pause();
       });
