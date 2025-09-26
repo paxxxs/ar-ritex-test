@@ -31,16 +31,16 @@
   <body>
     <!-- 🔹 Nuevo: overlay inicial -->
     <div id="overlay">
-      <p>Toca para iniciar la experiencia Ritex</p>
+      <p>Toca para iniciar una experiencia Ritex</p>
     </div>
 
     <!-- Escena AR -->
     <a-scene
       mindar-image="imageTargetSrc: targets.mind;
-                    filterMinCF: 0.0020; 
-                    filterBeta: 0.05;
+                    filterMinCF: 0.0050; 
+                    filterBeta: 0.07;
                     missTolerance: 10;
-                    warmupTolerance: 10;"
+                    warmupTolerance: 5;"
 
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
